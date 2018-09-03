@@ -65,10 +65,11 @@ export class Input extends React.PureComponent {
         return (
             <View style={this._getViewStyle()}>
                 <TextInput
+                    value={this.props.value}
                     style={this._getInputStyle()}
                     onFocus={() => this.setState({focused: true})}
                     onBlur={() => this.setState({focused: false})}
-                    onChangeText={this.onChangeText}
+                    onChangeText={this.props.onChangeText}
                     secureTextEntry={this.secureTextEntry}
                     placeholder={this.placeholder}
                 />
