@@ -55,7 +55,10 @@ export default class SignUpScreen extends React.Component {
     }
 
     onClickSignUp = () => {
-        this.props.dispatch(Actions.Auth.signup(this.state));
+        this.props.dispatch(Actions.Auth.signup(this.state)).then((user) => {
+            const navigateTo = user.type === 'teacher' ? 'TeacherNav' : 'StudentNav';
+            this.props.navigation.navigate(navigateTo)
+        });
     }
 }
 

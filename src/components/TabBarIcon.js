@@ -1,12 +1,12 @@
 import React from 'react';
-import { Icon } from 'expo';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; // 5.0.0
 
 import Colors from '../constants/Colors';
 
 export default class TabBarIcon extends React.Component {
   render() {
     return (
-      <Icon.Feather
+      <MaterialCommunityIcons
         name={this.props.name}
         size={20}
         style={{ marginBottom: -3 }}

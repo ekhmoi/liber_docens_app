@@ -19,13 +19,13 @@ export class RadioButtonGroup extends React.PureComponent {
     render() {
         return (
             <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-                {this.getChilds()}
+                {this.getChildren()}
             </View>
         )
     }
 
-    getChilds = () => (
-        this.props.children.map((child, index) => (
+    getChildren = () => (
+        this.props.children.map((child) => (
             <RadioButton key={child.props.value} selected={this.state.value === child.props.value} ref={(ref) => this.Buttons.push(ref)} text={child.props.text} onPress={() => this.onClickButton(child.props.value)}/>
         ))
     );

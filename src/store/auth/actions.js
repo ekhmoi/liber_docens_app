@@ -12,9 +12,28 @@ export default class Auth {
             dispatch({type: '@app/loading.stop'});
             if (res && res.auth) {
                 dispatch({type: '@auth/signin.success', payload: {user: res.user, token: res.token}});
+                return res.user;
             } else {
                 dispatch({type: '@auth/signin.fail', payload: {error: res}});
             }
         }
     }
+
+    static signin(params) {
+        return async dispatch => {
+
+            dispatch({type: '@app/loading.start'});
+            dispatch({type: '@auth/signin.start'});
+            const res = await api.auth.signin(params);
+
+            dispatch({type: '@app/loading.stop'});
+            if (res && res.auth) {
+                dispatch({type: '@auth/signin.success', payload: {user: res.user, token: res.token}});
+                return res.user;
+            } else {
+                dispatch({type: '@auth/signin.fail', payload: {error: res}});
+            }
+        }
+    }
+
 }

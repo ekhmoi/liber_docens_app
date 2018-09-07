@@ -6,17 +6,33 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import TeacherQuizScreen from "../screens/TeacherQuizScreen";
+import Colors from "../constants/Colors";
 
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
 });
 
 HomeStack.navigationOptions = {
-    tabBarLabel: 'Home',
+    tabBarLabel: 'Upcoming',
     tabBarIcon: ({ focused }) => (
         <TabBarIcon
             focused={focused}
-            name='home'
+            name='calendar'
+        />
+    ),
+};
+
+const QuizStack = createStackNavigator({
+    MyQuiz: TeacherQuizScreen,
+});
+
+QuizStack.navigationOptions = {
+    tabBarLabel: 'Quizzes',
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name='wunderlist'
         />
     ),
 };
@@ -26,11 +42,11 @@ const LinksStack = createStackNavigator({
 });
 
 LinksStack.navigationOptions = {
-    tabBarLabel: 'Links',
+    tabBarLabel: 'Students',
     tabBarIcon: ({ focused }) => (
         <TabBarIcon
             focused={focused}
-            name='tag'
+            name='account-multiple'
         />
     ),
 };
@@ -44,13 +60,18 @@ SettingsStack.navigationOptions = {
     tabBarIcon: ({ focused }) => (
         <TabBarIcon
             focused={focused}
-            name='eye'
+            name='settings'
         />
     ),
 };
 
 export default createBottomTabNavigator({
     HomeStack,
+    QuizStack,
     LinksStack,
     SettingsStack,
+}, {
+    tabBarOptions: {
+        activeTintColor: Colors.tintColor
+    }
 });

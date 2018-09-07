@@ -6,9 +6,27 @@ export class Auth {
         signin: `${API_BASE}/auth/signin`,
     };
 
+    async signin(params) {
+        const response = await fetch(this.urls.signin, {
+            method: 'POST',
+            body: JSON.stringify(params),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+
+        if (response) {
+            return await response.json().catch((err) => {
+                console.log(err);
+            });
+        }
+    }
+
     async signup(params) {
-        const response = await fetch(this.urls.signup,
-            {
+        const response = await fetch(this.urls.signup, {
                 method: 'POST',
                 body: JSON.stringify(params),
                 headers: {
