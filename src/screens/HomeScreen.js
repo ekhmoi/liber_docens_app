@@ -4,13 +4,13 @@ import {
   View,
 } from 'react-native';
 
-import {Button} from "../components/Button";
+import {GlobalStyles} from "../constants/GlobalStyles";
 
 export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#f3f3f3'}}>
+      <View style={GlobalStyles.container}>
         <ScrollView>
 
         </ScrollView>

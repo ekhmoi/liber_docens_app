@@ -3,10 +3,11 @@ import {
     TouchableOpacity,
     Text,
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; // 5.0.0
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import { getColorContrast } from '../utils/getColorContrast';
 import Colors from "../constants/Colors";
+import {StyledText} from "./StyledText";
 
 /**
  * @examples
@@ -35,7 +36,7 @@ export class Button extends React.PureComponent {
         iconStyle: PropTypes.object,
         iconPosition: PropTypes.oneOf(['right', 'left', 'end', 'start']),
         onPress: PropTypes.func,
-        shape: PropTypes.oneOf(['default', 'round']),
+        shape: PropTypes.oneOf(['default', 'round', 'fab']),
         size: PropTypes.oneOf(['default', 'small', 'large']),
         text: PropTypes.string,
         textStyle: PropTypes.object,
@@ -47,6 +48,10 @@ export class Button extends React.PureComponent {
 
     get buttonStyle() {
         return this.props.buttonStyle || {};
+    }
+
+    get iconStyle() {
+        return this.props.iconStyle || {};
     }
 
     get fill() {
@@ -86,8 +91,8 @@ export class Button extends React.PureComponent {
         return (
             <TouchableOpacity style={buttonStyle} activeOpacity={0.7} disabled={this.disabled}
                 onPress={this.props.onPress}>
-                <MaterialCommunityIcons name={this.icon} style={iconStyle} />
-                <Text style={textStyle}>{this.text}</Text>
+                {this.icon && <MaterialCommunityIcons name={this.icon} style={iconStyle} /> }
+                {this.text && <StyledText style={textStyle}>{this.text}</StyledText> }
             </TouchableOpacity>
         )
     }
@@ -104,7 +109,7 @@ export class Button extends React.PureComponent {
         const style = {
             backgroundColor: this.color,
             borderColor: this.color,
-            borderRadius: this.shape === 'round' ? 22 : 2,
+            borderRadius: 2,
             opacity: this.disabled ? 0.6 : 1,
             flexDirection: 'row'
         };
@@ -116,7 +121,10 @@ export class Button extends React.PureComponent {
         if (this.size === 'small') {
             style.height = 30;
             style.paddingLeft = 10;
-            style.marginLeft = 10
+            style.marginLeft = 10;
+            if (this.shape === 'fab') {
+                style.width = 30;
+            }
         }
 
         if (this.fill === 'outline' || this.fill === 'clear') {
@@ -136,6 +144,21 @@ export class Button extends React.PureComponent {
             style.borderRadius = 0;
         }
 
+        if (this.shape === 'fab') {
+            style.borderRadius = 28;
+            style.width = 56;
+            style.height = 56;
+            style.paddingLeft = 0;
+            style.paddingRight = 0;
+            style.paddingTop = 0;
+            style.paddingBottom = 0;
+            style.alignItems = 'center';
+            style.justifyContent = 'center';
+        } else if (this.shape === 'round') {
+            style.borderRadius = 22;
+        }
+
+
         return { ...defaultStyles.buttonStyle, ...style, ...this.buttonStyle };
     }
 
@@ -149,17 +172,17 @@ export class Button extends React.PureComponent {
             style.color = getColorContrast(this.color);
         }
 
-        if (this.text && this.icon) {
+        if (this.text && this.icon && this.shape !== 'fab') {
 
             style[this.iconPosition === 'right' || this.iconPosition === 'end' ? 'marginLeft' : 'marginRight'] = 10;
         }
-        return style;
+        return {...style, ...this.iconStyle};
     }
 
     _getTextStyle() {
         const style = {
             color: !this.fill || this.fill === 'solid' ? getColorContrast(this.color) : this.color
-        }
+        };
 
         if (this.expand !== 'inline' && (this.iconPosition === 'end' || this.iconPosition === 'start')) {
             style.flex = 1;
@@ -172,7 +195,7 @@ const defaultStyles = {
     buttonStyle: {
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 0.2,
+        shadowOpacity: 0.1,
         shadowRadius: 3,
         elevation: 1,
         height: 44,

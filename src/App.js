@@ -21,7 +21,7 @@ export default class App extends React.Component {
                 />
             );
         } else {
-            const AppNavigator = createRootNav(false, 'teacher');
+            const AppNavigator = createRootNav(true, 'teacher');
             return (
                 <View style={styles.container}>
                     {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
@@ -47,7 +47,9 @@ export default class App extends React.Component {
                 ...Icon.FontAwesome.font,
                 // We include SpaceMono because we use it in HomeScreen.js. Feel free
                 // to remove this if you are not using it in your app
-                'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
+                'app-font-Bold': require('../assets/fonts/Comfortaa/Comfortaa-Bold.ttf'),
+                'app-font-Light': require('../assets/fonts/Comfortaa/Comfortaa-Light.ttf'),
+                'app-font': require('../assets/fonts/Comfortaa/Comfortaa-Bold.ttf'),
             }),
         ]);
     };

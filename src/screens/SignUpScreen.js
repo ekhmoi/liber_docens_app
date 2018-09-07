@@ -6,6 +6,8 @@ import {Button} from "../components/Button";
 import {RadioButton, RadioButtonGroup} from "../components/RadioButtonGroup";
 import {connect} from "react-redux";
 import {Actions} from "../store/actions";
+import {GlobalStyles} from "../constants/GlobalStyles";
+import {StyledText} from "../components/StyledText";
 
 @connect(
     (store) => ({
@@ -32,10 +34,10 @@ export default class SignUpScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={{ fontSize: 30, opacity: 0.8, fontWeight: '600', }}>Sign up</Text>
-                <Text style={{ fontSize: 17, opacity: 0.6, fontWeight: '400', marginBottom: 50, marginTop: 20 }}>
-                    Please register to continue.</Text>
+            <View style={GlobalStyles.container}>
+                <StyledText style={{ fontSize: 30, opacity: 0.8, fontWeight: '600', }}>Sign up</StyledText>
+                <StyledText style={{ fontSize: 17, opacity: 0.6, fontWeight: '400', marginBottom: 50, marginTop: 20 }}>
+                    Please register to continue.</StyledText>
                 <Input value={this.state.name} onChangeText={(name) => this.setState({name})} placeholder={'Full Name'} icon={'account'} color={Colors.tintColor} fill='outline' />
                 <Input value={this.state.email} onChangeText={(email) => {
                     this.setState({email});
@@ -44,7 +46,7 @@ export default class SignUpScreen extends React.Component {
                 <Input value={this.state.password} onChangeText={(password) => this.setState({password})} placeholder={'Password'} icon={'key'} color={Colors.tintColor} fill='outline' secureTextEntry={true} />
                 <Input value={this.state.passwordConfirm} onChangeText={(passwordConfirm) => this.setState({passwordConfirm})} placeholder={'Confirm Password'} icon={'key'} color={Colors.tintColor} fill='outline' secureTextEntry={true} />
 
-                <Text style={{opacity: 0.5, fontWeight: '400', marginTop: 15, marginBottom: -10}}>{'Please select how you are going to use this service. \n\rAs a:'}</Text>
+                <StyledText style={{opacity: 0.5, fontWeight: '400', marginTop: 15, marginBottom: -10}}>{'Please select how you are going to use this service. \n\rAs a:'}</StyledText>
                 <RadioButtonGroup placeholder={'Account type'} onChange={(type) => this.setState({type})}>
                     <View text={'Teacher'} value={'teacher'}/>
                     <View text={'Student'} value={'student'} />

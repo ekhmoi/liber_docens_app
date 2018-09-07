@@ -8,6 +8,8 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import TeacherQuizScreen from "../screens/TeacherQuizScreen";
 import Colors from "../constants/Colors";
+import QuizTypeSelectionScreen from "../screens/QuizTypeSelectionScreen";
+import {GlobalStyles} from "../constants/GlobalStyles";
 
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
@@ -25,9 +27,11 @@ HomeStack.navigationOptions = {
 
 const QuizStack = createStackNavigator({
     MyQuiz: TeacherQuizScreen,
+    SelectQuizType: QuizTypeSelectionScreen
 });
 
 QuizStack.navigationOptions = {
+    headerStyle: GlobalStyles.header,
     tabBarLabel: 'Quizzes',
     tabBarIcon: ({ focused }) => (
         <TabBarIcon
@@ -72,6 +76,9 @@ export default createBottomTabNavigator({
     SettingsStack,
 }, {
     tabBarOptions: {
-        activeTintColor: Colors.tintColor
+        activeTintColor: Colors.tintColor,
+        style: {
+            backgroundColor: '#f9f9f9'
+        }
     }
 });
